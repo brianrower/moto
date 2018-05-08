@@ -507,6 +507,9 @@ class IoTBackend(BaseBackend):
                 thing.thing_name, None
             )
 
+    def describe_endpoint(self, endpoint_type):
+        return 'localhost.iot.{}.amazonaws.com'.format(self.region_name)
+    
 
 available_regions = boto3.session.Session().get_available_regions("iot")
 iot_backends = {region: IoTBackend(region) for region in available_regions}

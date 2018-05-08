@@ -374,3 +374,10 @@ class IoTResponse(BaseResponse):
             thing_groups_to_remove=thing_groups_to_remove,
         )
         return json.dumps(dict())
+    
+    def describe_endpoint(self):
+        endpoint_type = self._get_param("endpointType")
+        endpoint_address = self.iot_backend.describe_endpoint(
+            endpoint_type=endpoint_type,
+        )
+        return json.dumps(dict(endpointAddress=endpoint_address))
