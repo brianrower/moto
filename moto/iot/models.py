@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from os import environ
 import time
 import boto3
 import string
@@ -508,7 +509,9 @@ class IoTBackend(BaseBackend):
             )
 
     def describe_endpoint(self, endpoint_type):
-        return 'localhost.iot.{}.amazonaws.com'.format(self.region_name)
+        if environ.get('MOTO_IOT_ENDPOINT'):
+            return environ.get('MOTO_IOT_ENDPOINT')
+        return 'data.iot.{}.amazonaws.com'.format(self.region_name)
     
 
 available_regions = boto3.session.Session().get_available_regions("iot")
