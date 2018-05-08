@@ -10,5 +10,6 @@ response = IoTDataPlaneResponse()
 
 
 url_paths = {
-    '{0}/.*$': response.dispatch,
+    '{0}/topics/<topic>$': response.dispatch,
+    '{0}/things/<thingName>/shadow$': response.dispatch,
 }
